@@ -1,5 +1,5 @@
 import { CanActivate, ExecutionContext, Injectable,HttpException } from '@nestjs/common';
-import { GqlExecutionContext } from '@nestjs/graphql';t
+import { GqlExecutionContext } from '@nestjs/graphql';
 import * as jwt from 'jsonwebtoken';
 
 @Injectable()
