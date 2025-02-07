@@ -4,7 +4,6 @@ import { CreateAuthInput } from './dto/create-auth.input';
 import { LoginAuthInput } from './dto/login-auth.input'
 import { Response } from 'express';
 import { Auth } from './entities/auth.entity';
-import { Res } from '@nestjs/common';
 
 @Resolver(() => Auth)
 export class AuthResolver {

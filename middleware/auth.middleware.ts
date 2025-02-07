@@ -1,7 +1,6 @@
 import { CanActivate, ExecutionContext, Injectable, HttpException } from '@nestjs/common';
 import { GqlExecutionContext } from '@nestjs/graphql';
 import * as jwt from 'jsonwebtoken';
-import { AuthGuard as PassportAuthGuard } from '@nestjs/passport';
 
 @Injectable()
 export class AuthGuard implements CanActivate {

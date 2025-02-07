@@ -6,7 +6,12 @@ type User {
   id: String!
   name: String!
   email: String!
-  role: String!
+  role: Role!
+}
+
+enum Role {
+  ADMIN
+  NORMAL_USER
 }
 
 type Auth {
@@ -43,4 +48,5 @@ input UpdateUserInput {
   name: String
   email: String
   password: String
+  role: Role!
 }

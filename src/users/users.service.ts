@@ -19,16 +19,19 @@ export class UsersService {
       if (!_id) throw new BadRequestException(HttpStatus.BAD_REQUEST)
       return _id
     } catch (error) {
-      throw new HttpException(error.message,HttpStatus.BAD_REQUEST)
+      throw new HttpException(error.message, HttpStatus.BAD_REQUEST)
     }
   }
 
   async update(id: string, updateUserInput: UpdateUserInput) {
     try {
-      return await prisma.user.update({
+
+      const updU = await prisma.user.update({
         where: { id },
         data: { ...updateUserInput }
       });
+      if (!updU) throw new HttpException('Not Updated', HttpStatus.BAD_REQUEST)
+      return updU
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.BAD_GATEWAY)
     }

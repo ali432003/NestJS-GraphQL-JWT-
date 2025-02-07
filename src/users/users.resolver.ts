@@ -3,10 +3,10 @@ import { UsersService } from './users.service';
 import { User } from './entities/user.entity';
 import { UpdateUserInput } from './dto/update-user.input';
 import { Param, UseGuards } from '@nestjs/common';
-import { AuthGuard } from 'src/middleware/auth.middleware';
-import { Roles } from 'src/decorators/roles.decorator';
-import { Role } from 'src/types/roles.enum';
-import { RolesGuard } from 'src/middleware/roles.authorization';
+import { AuthGuard } from 'middleware/auth.middleware';
+import { Roles } from 'decorators/roles.decorator';
+import { Role } from 'types/roles.enum';
+import { RolesGuard } from 'middleware/roles.authorization';
 
 @Resolver(() => User)
 export class UsersResolver {

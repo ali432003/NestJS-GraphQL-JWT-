@@ -1,7 +1,8 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
 import { Post, Profile } from '@prisma/client';
 import { IsArray, IsEmail, IsEnum, IsNotEmpty, IsObject, IsOptional } from 'class-validator';
-import { Role } from 'src/types/roles.enum';
+import { Role } from 'types/roles.enum';
+
 
 @ObjectType()
 export class User {
@@ -19,5 +20,5 @@ export class User {
 
   @Field(()=> Role)
   @IsEnum(['ADMIN', 'NORMAL_USER'])
-  role: string
+  role: Role
 }
