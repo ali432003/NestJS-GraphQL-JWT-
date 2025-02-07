@@ -4,25 +4,31 @@ import { User } from './entities/user.entity';
 import { UpdateUserInput } from './dto/update-user.input';
 import { Param, UseGuards } from '@nestjs/common';
 import { AuthGuard } from 'src/middleware/auth.middleware';
+import { Roles } from 'src/decorators/roles.decorator';
+import { Role } from 'src/types/roles.enum';
+import { RolesGuard } from 'src/middleware/roles.authorization';
 
 @Resolver(() => User)
 export class UsersResolver {
   constructor(private readonly usersService: UsersService) { }
 
   @Query(() => [User], { name: 'users' })
-  @UseGuards(AuthGuard)
+  @Roles(Role.ADMIN) // This is the mutation that is allowed to ADMIN only!
+  @UseGuards(AuthGuard, RolesGuard)
   findAll() {
     return this.usersService.findAll();
   }
 
   @Query(() => User, { name: 'user' })
-  @UseGuards(AuthGuard)
+  @Roles(Role.ADMIN) 
+  @UseGuards(AuthGuard, RolesGuard)
   findOne(@Args('id', { type: () => String }) id: string) {
     return this.usersService.findOne(id);
   }
 
   @Mutation(() => User, { name: 'updateUser' })
-  @UseGuards(AuthGuard)
+  @Roles(Role.ADMIN, Role.NORMAL_USER) 
+  @UseGuards(AuthGuard, RolesGuard)
   updateUser(
     @Args('id', { type: () => String }) id: string,
     @Args('updateUserInput') updateUserInput: UpdateUserInput
@@ -31,7 +37,8 @@ export class UsersResolver {
   }
 
   @Mutation(() => User)
-  @UseGuards(AuthGuard)
+  @Roles(Role.ADMIN) 
+  @UseGuards(AuthGuard, RolesGuard)
   removeUser(@Args('id', { type: () => String }) id: string) {
     return this.usersService.remove(id);
   }

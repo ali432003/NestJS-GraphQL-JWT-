@@ -31,7 +31,7 @@ export class AuthService {
       if (!user) throw new HttpException('User not found', HttpStatus.BAD_REQUEST);
       if (user.password !== password) throw new HttpException('Invalid password', HttpStatus.BAD_REQUEST);
 
-      const token = sign({ id: user.id, email: user.email }, process.env.JWT_SECRET!, { expiresIn: '1d' });
+      const token = sign({ id: user.id, email: user.email, role: user.role }, process.env.JWT_SECRET!, { expiresIn: '1d' });
       res.cookie('token', token, { httpOnly: true });
       return { ...user, token: token };
     } catch (error) {
